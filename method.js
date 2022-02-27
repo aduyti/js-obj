@@ -9,12 +9,19 @@ const Student = {
         major: 'mathematics'
     },
     //object method
-    withdrawBalance: function (amount) { return this.balance -= amount; }
+    withdrawBalance: function (amount, tax = 0) {
+        this.balance -= (amount + tax);
+        console.log(this.name, this.balance);
+    }
 };
 const Teacher = {
     id: 100001,
     name: 'Teacher',
+    balance: 10000,
     dept: 'mathematics',
-    subject: ['algebra', 'calculus']
 }
-cons
+// bind to borrow method form another object
+const teaWithdraw = Student.withdrawBalance.bind(Teacher);
+teaWithdraw(200);
+Student.withdrawBalance.call(Teacher, 500, 10);
+Student.withdrawBalance.apply(Teacher, [500, 10]);
